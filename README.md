@@ -34,7 +34,7 @@ pip install -r requirements.txt
 ollama run gpt-oss
 
 5. Inicie a aplicacao web do Streamlit:
-streamlit run app.py
+python -m streamlit run financiasAppADACIA.py
 
 ## Como Utilizar
 
