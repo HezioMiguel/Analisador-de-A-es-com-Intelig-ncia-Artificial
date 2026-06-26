@@ -147,23 +147,17 @@ if st.button("Atualizar Cotações Salvas"):
             for item in lista_acoes:
                 ticker_salvo = item["Ticker"]
                 
-                # 1. Agora recebemos as 3 variáveis corretamente
                 novo_preco, novo_graham, nova_minima = analisar_graham(ticker_salvo)
                 
                 if isinstance(novo_graham, float):
-                    # 2. Refazemos a matemática da porcentagem com o preço do dia
                     potencial_reais = novo_graham - novo_preco
                     potencial_porcentagem = (potencial_reais / novo_preco) * 100 if novo_preco > 0 else 0
                     
-                    # 3. Atualizamos todos os dados no dicionário do item
                     item["Preco Atual"] = novo_preco
                     item["Preco Justo (Graham)"] = novo_graham
                     item["Potencial (%)"] = round(potencial_porcentagem, 2)
-                    item["Fundo 57 Semanas"] = nova_minima
-                    
-                    # Nota: Continuamos não pedindo para a IA ler de novo para economizar tempo
-            
-            # Salva a lista inteira atualizada de volta no arquivo JSON
+                    item["Fundo 52 Semanas"] = nova_minima
+                                
             with open(ARQUIVO_DB, "w") as arquivo:
                 json.dump(lista_acoes, arquivo, indent=4)
                 
@@ -188,16 +182,13 @@ if len(lista_acoes) > 0:
         with col3:
             st.write(f"Justo: R$ {item['Preco Justo (Graham)']:.2f}")
         with col4:
-            # Puxamos a porcentagem calculada (com formatação)
             potencial = item.get('Potencial (%)', 0) 
             
-            # Um truque visual bacana: se for positivo, mostramos uma setinha pra cima
             if potencial > 0:
                 st.success(f"📈 +{potencial}%")
             else:
                 st.error(f"📉 {potencial}%")
         with col5:
-            # Mostrando o menor preço do período para você ficar de olho
             fundo = item.get('Fundo 57 Semanas', 0)
             st.write(f"Fundo: R$ {fundo:.2f}")        
         with col6:
@@ -207,7 +198,6 @@ if len(lista_acoes) > 0:
                 st.rerun()
                 
     st.divider()
-    # Se ainda quiser ver o DataFrame completo formatado abaixo:
     tabela = pd.DataFrame(lista_acoes)
     st.dataframe(tabela, use_container_width=True)
 else:
