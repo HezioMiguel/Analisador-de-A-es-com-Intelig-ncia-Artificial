@@ -111,7 +111,6 @@ def deletar_acao(ticker: str) -> None:
 st.title(" Analisador de Ações com Inteligência Artificial")
 st.write("usando a metodologia de Benjamin Graham para explicar qual tipo de investimento a ação se enquadra \n\n 1. Ação Defensiva (Investidor Clássico): Filtra ativos com múltiplos controlados (P/L < 15, P/VP < 1.5), alta liquidez corrente (> 2.0, garantindo solvência de curto prazo) e distribuição regular de proventos através do Dividend Yield.\n\n 2. Ação Net-Net (Barganhas Profundas): Identifica empresas negociadas com descontos patrimoniais severos (P/VP muito baixo), mas que mantém o Fluxo de Caixa Livre positivo para mitigar o risco de falência iminente. \n\n 3. Métricas de Qualidade Extras: Avalia a relação Dívida/Patrimônio para garantir que a alavancagem financeira não comprometa a estabilidade estrutural da empresa no longo prazo \n\n Se a empresa apresentar prejuízo contábil ou patrimônio líquido negativo, o cálculo é abortado, refletindo a regra número um do investimento defensivo: a preservação do capital. \n\n deve-se colocar 'sa.' apos o nome ticker da ação .   ")
 
-# Caixa de texto para você digitar a ação (O .upper() garante que fique em maiúsculo)
 with st.form(key="form_analise"):
     ticker_da_vez = st.text_input("Digite o Ticker da Ação (Ex: VALE3.SA, NIKE34.SA, VIVA3.SA):").upper()
     botao_analisa = st.form_submit_button("Analisar Ação")
