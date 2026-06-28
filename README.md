@@ -44,6 +44,9 @@ python -m streamlit run financiasAppADACIA.py
 * O relatorio e os calculos sao salvos automaticamente no banco de dados e exibidos na tabela historica.
 * Utilize o botao de atualizacao para recalcular os precos atuais de todas as acoes salvas no banco.
 
+## Pitch
+* https://youtu.be/J4oP_12tBBY
+
 ## Aviso Legal
 
 Este software tem fins estritamente educacionais e de pesquisa em desenvolvimento de sistemas e integracao de IA. As analises geradas nao constituem recomendacao de compra ou venda de ativos financeiros.
