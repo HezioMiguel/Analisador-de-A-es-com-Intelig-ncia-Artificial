@@ -28,7 +28,7 @@ def analisar_graham(ticker_escolhido:str)->tuple:
     vpa = ficha.get('bookValue')
 
     if lpa is None or vpa is None or lpa <= 0 or vpa <= 0:
-        return preco_atual, "Erro de dados ou prejuízo", 0 
+        return preco_atual, "Erro de dados ou prejuízo", 0, {}
 
     numero_graham = math.sqrt(22.5 * lpa * vpa)
     numero_graham_arredondado = round(numero_graham, 2)
@@ -140,7 +140,7 @@ def deletar_acao(ticker: str) -> None:
 # --- INTERFACE VISUAL (STREAMLIT) ---
 
 st.title(" Analisador de Ações com Inteligência Artificial")
-st.write("usando a metodologia de Benjamin Graham para explicar qual tipo de investimento a ação se enquadra \n\n 1. Ação Defensiva (Investidor Clássico): Filtra ativos com múltiplos controlados (P/L < 15, P/VP < 1.5), alta liquidez corrente (> 2.0, garantindo solvência de curto prazo) e distribuição regular de proventos através do Dividend Yield.\n\n 2. Ação Net-Net (Barganhas Profundas): Identifica empresas negociadas com descontos patrimoniais severos (P/VP muito baixo), mas que mantém o Fluxo de Caixa Livre positivo para mitigar o risco de falência iminente. \n\n 3. Acao de Qualidade (Screener): Avalia a relação Dívida/Patrimônio para garantir que a alavancagem financeira não comprometa a estabilidade estrutural da empresa no longo prazo \n\n Se a empresa apresentar prejuízo contábil ou patrimônio líquido negativo, o cálculo é abortado, refletindo a regra número um do investimento defensivo: a preservação do capital. \n\n deve-se colocar 'sa.' apos o nome ticker da ação .   ")
+st.write("usando a metodologia de Benjamin Graham para explicar qual tipo de investimento a ação se enquadra \n\n 1. Ação Defensiva (Investidor Clássico): Filtra ativos com múltiplos controlados (P/L < 15, P/VP < 1.5), alta liquidez corrente (> 2.0, garantindo solvência de curto prazo) e distribuição regular de proventos através do Dividend Yield.\n\n 2. Ação Net-Net (Barganhas Profundas): Identifica empresas negociadas com descontos patrimoniais severos (P/VP muito baixo), mas que mantém o Fluxo de Caixa Livre positivo para mitigar o risco de falência iminente. \n\n 3. Acao de Qualidade (Screener): Avalia a relação Dívida/Patrimônio para garantir que a alavancagem financeira não comprometa a estabilidade estrutural da empresa no longo prazo \n\n Se a empresa apresentar prejuízo contábil ou patrimônio líquido negativo, o cálculo é abortado, refletindo a regra número um do investimento defensivo: a preservação do capital. \n\n deve-se colocar '.sa' apos o nome ticker da ação .   ")
 
 # Caixa de texto para você digitar a ação (O .upper() garante que fique em maiúsculo)
 with st.form(key="form_analise"):
@@ -152,7 +152,7 @@ with st.form(key="form_analise"):
 if botao_analisa:
     if ticker_da_vez:
         if ticker_da_vez in [acao["Ticker"] for acao in lista_acoes]: 
-            st.warning(f"O ativo {ticker_da_vez} já está na sua base de dados. Utilize o botão 'Sincronizar Cotações' para atualizar os valores.")
+            st.warning(f"O ativo {ticker_da_vez} já está na sua base de dados.")
         else:
             with st.spinner(f"Baixando dados de {ticker_da_vez} e calculando..."):
                 
